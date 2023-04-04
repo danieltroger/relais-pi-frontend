@@ -11,11 +11,11 @@ export type GPIOObj = {
 };
 
 export default function GPIO() {
-  const [inputs] = get_backend_synced_signal<GPIOObj, true>("gpio", {
+  const [get_gpio] = get_backend_synced_signal<GPIOObj, true>("gpio", {
     inputs: {},
     outputs: {},
   });
-  const keys_l1 = createMemo(() => Object.keys(inputs()));
+  const keys_l1 = createMemo(() => Object.keys(get_gpio()));
 
   return (
     <main>
@@ -24,7 +24,7 @@ export default function GPIO() {
       <div class="gpio">
         <For each={keys_l1() as any}>
           {(key: "inputs" | "outputs") => {
-            const things = createMemo(() => inputs()[key]);
+            const things = createMemo(() => get_gpio()[key]);
             const keys = createMemo(() => Object.keys(things()));
             const is_outputs = key === "outputs";
 
