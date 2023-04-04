@@ -2,7 +2,7 @@
   "name": "heating-frontend",
   "scripts": {
     "dev": "DEBUG=true SENTRY=false solid-start dev",
-    "build": "DEBUG=true SENTRY=false solid-start build && cat ./src/fake_document.ts ./dist/server.js > ./dist/temp && mv ./dist/temp ./dist/server.js",
+    "build": "DEBUG=true SENTRY=false solid-start build",
     "start": "DEBUG=true SENTRY=false solid-start start"
   },
   "type": "module",
@@ -15,13 +15,14 @@
   "dependencies": {
     "@depict-ai/plp-styling": "^0.0.3",
     "@depict-ai/ui": "^0.0.33",
-    "@depict-ai/utilishared": "^0.0.31",
+    "@depict-ai/utilishared": "0.0.73",
     "@solidjs/meta": "^0.28.2",
-    "@solidjs/router": "^0.6.0",
+    "@solidjs/router": "^0.8.2",
     "@suid/icons-material": "^0.5.11",
     "@suid/material": "^0.11.1",
+    "@suid/system": "^0.9.1",
     "prettier": "^2.8.3",
-    "solid-js": "^1.6.9",
+    "solid-js": "^1.7.2",
     "solid-start": "^0.2.14",
     "undici": "^5.15.0"
   },
@@ -30,7 +31,8 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "@depict-ai/utilishared@0.0.31": "patches/@depict-ai__utilishared@0.0.31.patch",
+      "solid-js@1.7.2": "patches/solid-js@1.7.2.patch",
+      "@suid/system@0.9.1": "patches/@suid__system@0.9.1.patch",
       "@depict-ai/ui@0.0.33": "patches/@depict-ai__ui@0.0.33.patch"
     }
   }

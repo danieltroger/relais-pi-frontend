@@ -1,0 +1,150 @@
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+index 0000000000000000000000000000000000000000..b58b603fea78041071d125a30db58d79b3d49217
+--- /dev/null
++++ b/.idea/.gitignore
+@@ -0,0 +1,5 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Editor-based HTTP Client requests
++/httpRequests/
+diff --git a/.idea/24e7beedfc38588d28b3a9dfb8cccb27.iml b/.idea/24e7beedfc38588d28b3a9dfb8cccb27.iml
+new file mode 100644
+index 0000000000000000000000000000000000000000..0c8867d7e175f46d4bcd66698ac13f4ca00cf592
+--- /dev/null
++++ b/.idea/24e7beedfc38588d28b3a9dfb8cccb27.iml
+@@ -0,0 +1,12 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="WEB_MODULE" version="4">
++  <component name="NewModuleRootManager">
++    <content url="file://$MODULE_DIR$">
++      <excludeFolder url="file://$MODULE_DIR$/temp" />
++      <excludeFolder url="file://$MODULE_DIR$/.tmp" />
++      <excludeFolder url="file://$MODULE_DIR$/tmp" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+index 0000000000000000000000000000000000000000..5388f40ffa51b9757514d2c7843a3433a478ccec
+--- /dev/null
++++ b/.idea/modules.xml
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/24e7beedfc38588d28b3a9dfb8cccb27.iml" filepath="$PROJECT_DIR$/.idea/24e7beedfc38588d28b3a9dfb8cccb27.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+new file mode 100644
+index 0000000000000000000000000000000000000000..417316a611af39db7439e8e4b8c597909e4bf513
+--- /dev/null
++++ b/.idea/workspace.xml
+@@ -0,0 +1,53 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="AutoImportSettings">
++    <option name="autoReloadType" value="SELECTIVE" />
++  </component>
++  <component name="ChangeListManager">
++    <list default="true" id="296cfb04-204d-4dea-838a-008498cfa110" name="Changes" comment="" />
++    <option name="SHOW_DIALOG" value="false" />
++    <option name="HIGHLIGHT_CONFLICTS" value="true" />
++    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
++    <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="MarkdownSettingsMigration">
++    <option name="stateVersion" value="1" />
++  </component>
++  <component name="ProjectId" id="2NyX7wQYHIgPF5MOidX6cqu2QjU" />
++  <component name="ProjectViewState">
++    <option name="autoscrollFromSource" value="true" />
++    <option name="autoscrollToSource" value="true" />
++    <option name="hideEmptyMiddlePackages" value="true" />
++    <option name="showLibraryContents" value="true" />
++  </component>
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  }
++}</component>
++  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
++  <component name="TaskManager">
++    <task active="true" id="Default" summary="Default task">
++      <changelist id="296cfb04-204d-4dea-838a-008498cfa110" name="Changes" comment="" />
++      <created>1680637131896</created>
++      <option name="number" value="Default" />
++      <option name="presentableId" value="Default" />
++      <updated>1680637131896</updated>
++      <workItem from="1680637132931" duration="377000" />
++      <workItem from="1680637843485" duration="49000" />
++    </task>
++    <servers />
++  </component>
++  <component name="TypeScriptGeneratedFilesManager">
++    <option name="version" value="3" />
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/web/dist/server.cjs b/web/dist/server.cjs
+index 375586aeec4f89e7671b2cd58f980a2824cd32b0..70fff093b721c448cbca966ca0e3087353c3217a 100644
+--- a/web/dist/server.cjs
++++ b/web/dist/server.cjs
+@@ -600,6 +600,12 @@ Object.defineProperty(exports, 'mergeProps', {
+   enumerable: true,
+   get: function () { return solidJs.mergeProps; }
+ });
++ const SVGElements = /*#__PURE__*/new Set([
++  "altGlyph", "altGlyphDef", "altGlyphItem", "animate", "animateColor", "animateMotion", "animateTransform", "circle", "clipPath", "color-profile", "cursor", "defs", "desc", "ellipse", "feBlend", "feColorMatrix", "feComponentTransfer", "feComposite", "feConvolveMatrix", "feDiffuseLighting", "feDisplacementMap", "feDistantLight", "feFlood", "feFuncA", "feFuncB", "feFuncG", "feFuncR", "feGaussianBlur", "feImage", "feMerge", "feMergeNode", "feMorphology", "feOffset", "fePointLight", "feSpecularLighting", "feSpotLight", "feTile", "feTurbulence", "filter", "font", "font-face", "font-face-format", "font-face-name", "font-face-src", "font-face-uri", "foreignObject", "g", "glyph", "glyphRef", "hkern", "image", "line", "linearGradient", "marker", "mask", "metadata", "missing-glyph", "mpath", "path", "pattern", "polygon", "polyline", "radialGradient", "rect",
++  "set", "stop",
++  "svg", "switch", "symbol", "text", "textPath",
++  "tref", "tspan", "use", "view", "vkern"]);
++
+ exports.Assets = Assets;
+ exports.Dynamic = Dynamic;
+ exports.Hydration = Hydration;
+@@ -609,6 +615,8 @@ exports.Portal = Portal;
+ exports.addEventListener = addEventListener;
+ exports.delegateEvents = delegateEvents;
+ exports.escape = escape;
++exports.SVGElements = SVGElements;
++exports.getNextElement = () => null;
+ exports.generateHydrationScript = generateHydrationScript;
+ exports.getAssets = getAssets;
+ exports.getHydrationKey = getHydrationKey;
+diff --git a/web/dist/server.js b/web/dist/server.js
+index dc722c8efbd472cd88ee1568181157bd99d3b834..5289e3846b33cadcf993600cb8bdaadfc05321f1 100644
+--- a/web/dist/server.js
++++ b/web/dist/server.js
+@@ -559,4 +559,14 @@ function Portal(props) {
+   return "";
+ }
+ 
++export function getNextElement(){
++    return null;
++}
++
++export const SVGElements = /*#__PURE__*/new Set([
++  "altGlyph", "altGlyphDef", "altGlyphItem", "animate", "animateColor", "animateMotion", "animateTransform", "circle", "clipPath", "color-profile", "cursor", "defs", "desc", "ellipse", "feBlend", "feColorMatrix", "feComponentTransfer", "feComposite", "feConvolveMatrix", "feDiffuseLighting", "feDisplacementMap", "feDistantLight", "feFlood", "feFuncA", "feFuncB", "feFuncG", "feFuncR", "feGaussianBlur", "feImage", "feMerge", "feMergeNode", "feMorphology", "feOffset", "fePointLight", "feSpecularLighting", "feSpotLight", "feTile", "feTurbulence", "filter", "font", "font-face", "font-face-format", "font-face-name", "font-face-src", "font-face-uri", "foreignObject", "g", "glyph", "glyphRef", "hkern", "image", "line", "linearGradient", "marker", "mask", "metadata", "missing-glyph", "mpath", "path", "pattern", "polygon", "polyline", "radialGradient", "rect",
++  "set", "stop",
++  "svg", "switch", "symbol", "text", "textPath",
++  "tref", "tspan", "use", "view", "vkern"]);
++
+ export { Assets, Dynamic, Hydration, HydrationScript, NoHydration, Portal, addEventListener, delegateEvents, escape, generateHydrationScript, getAssets, getHydrationKey, hydrate, insert, isDev, isServer, pipeToNodeWritable, pipeToWritable, render, renderToStream, renderToString, renderToStringAsync, resolveSSRNode, spread, ssr, ssrAttribute, ssrClassList, ssrElement, ssrHydrationKey, ssrSpread, ssrStyle, stringify, useAssets };

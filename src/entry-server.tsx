@@ -1,4 +1,3 @@
-import "./fake_document";
 import {
   createHandler,
   renderAsync,

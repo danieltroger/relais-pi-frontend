@@ -12,7 +12,7 @@ import {
   ListItem,
 } from "@suid/material";
 
-export function HardcodedToggles() {
+export default function HardcodedToggles() {
   const [get_gpio] = get_backend_synced_signal<GPIOObj, true>("gpio", {
     inputs: {},
     outputs: {},

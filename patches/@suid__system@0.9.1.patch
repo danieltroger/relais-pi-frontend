@@ -1,0 +1,171 @@
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+index 0000000000000000000000000000000000000000..b58b603fea78041071d125a30db58d79b3d49217
+--- /dev/null
++++ b/.idea/.gitignore
+@@ -0,0 +1,5 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Editor-based HTTP Client requests
++/httpRequests/
+diff --git a/.idea/6f475dffb0665dedd4625674087cbcd9.iml b/.idea/6f475dffb0665dedd4625674087cbcd9.iml
+new file mode 100644
+index 0000000000000000000000000000000000000000..0c8867d7e175f46d4bcd66698ac13f4ca00cf592
+--- /dev/null
++++ b/.idea/6f475dffb0665dedd4625674087cbcd9.iml
+@@ -0,0 +1,12 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="WEB_MODULE" version="4">
++  <component name="NewModuleRootManager">
++    <content url="file://$MODULE_DIR$">
++      <excludeFolder url="file://$MODULE_DIR$/temp" />
++      <excludeFolder url="file://$MODULE_DIR$/.tmp" />
++      <excludeFolder url="file://$MODULE_DIR$/tmp" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+index 0000000000000000000000000000000000000000..e8dd852bc6ebf9a5b474307b410466bc3e4ddfb4
+--- /dev/null
++++ b/.idea/modules.xml
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/6f475dffb0665dedd4625674087cbcd9.iml" filepath="$PROJECT_DIR$/.idea/6f475dffb0665dedd4625674087cbcd9.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+new file mode 100644
+index 0000000000000000000000000000000000000000..d6a563b4a1ed4baf16b588b44c3372758c9bd7dd
+--- /dev/null
++++ b/.idea/workspace.xml
+@@ -0,0 +1,51 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="AutoImportSettings">
++    <option name="autoReloadType" value="SELECTIVE" />
++  </component>
++  <component name="ChangeListManager">
++    <list default="true" id="faf804af-2e86-4ec3-a54f-6c3da0c8e8dd" name="Changes" comment="" />
++    <option name="SHOW_DIALOG" value="false" />
++    <option name="HIGHLIGHT_CONFLICTS" value="true" />
++    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
++    <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="MarkdownSettingsMigration">
++    <option name="stateVersion" value="1" />
++  </component>
++  <component name="ProjectId" id="2NyXuDQnk0x3yq3RRrYom7OQ227" />
++  <component name="ProjectViewState">
++    <option name="autoscrollFromSource" value="true" />
++    <option name="autoscrollToSource" value="true" />
++    <option name="hideEmptyMiddlePackages" value="true" />
++    <option name="showLibraryContents" value="true" />
++  </component>
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "WebServerToolWindowFactoryState": "false",
++    "node.js.detected.package.eslint": "true",
++    "node.js.detected.package.tslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "nodejs_package_manager_path": "npm",
++    "vue.rearranger.settings.migration": "true"
++  }
++}]]></component>
++  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
++  <component name="TaskManager">
++    <task active="true" id="Default" summary="Default task">
++      <changelist id="faf804af-2e86-4ec3-a54f-6c3da0c8e8dd" name="Changes" comment="" />
++      <created>1680637515873</created>
++      <option name="number" value="Default" />
++      <option name="presentableId" value="Default" />
++      <updated>1680637515873</updated>
++      <workItem from="1680637516922" duration="1061000" />
++    </task>
++    <servers />
++  </component>
++  <component name="TypeScriptGeneratedFilesManager">
++    <option name="version" value="3" />
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/Dynamic/Dynamic.jsx b/Dynamic/Dynamic.jsx
+index 724cdc6addf57531712a30815b1bfb6b32dfc92d..d722ffaa9bf1bbe078d7e3add39fa0c467ca2c12 100644
+--- a/Dynamic/Dynamic.jsx
++++ b/Dynamic/Dynamic.jsx
+@@ -1,7 +1,7 @@
+ /* eslint-disable no-constant-condition */
+ /* eslint-disable no-case-declarations */
+ import { $DEVCOMP, createMemo, sharedConfig, splitProps, untrack, } from "solid-js";
+-import { getNextElement, isServer, spread, ssrElement, SVGElements, } from "solid-js/web";
++import { getNextElement, isServer, spread, ssrElement, SVGElements } from "solid-js/web";
+ function createElement(tagName, isSVG = false) {
+     return isSVG
+         ? document.createElementNS("http://www.w3.org/2000/svg", tagName)
+@@ -44,4 +44,4 @@ export function Dynamic(props) {
+         }
+     });
+ }
+-export default Dynamic;
++export default (...args) => isServer ? ServerDynamic(...args) : Dynamic(...args);
+diff --git a/ThemeContext/index.jsx b/ThemeContext/index.jsx
+index a326da832758c6b9852c8a0417512a3601df5ccf..b80f6a9f00c578dd85b1042230946e84c6089991 100644
+--- a/ThemeContext/index.jsx
++++ b/ThemeContext/index.jsx
+@@ -1 +1 @@
+-export { default } from "./ThemeContext";
++export { default } from "./ThemeContext.jsx";
+diff --git a/createTheme/index.jsx b/createTheme/index.jsx
+index 039bbf730a3f7811939ff35ae72164e4033f26b6..e9e22ae1febe144d753ed83f4f35ee2bd7e27a02 100644
+--- a/createTheme/index.jsx
++++ b/createTheme/index.jsx
+@@ -1,2 +1,2 @@
+-export { default } from "./createTheme";
+-export * from "./createTheme";
++export { default } from "./createTheme.jsx";
++export * from "./createTheme.jsx";
+diff --git a/getDefaultTheme.js b/getDefaultTheme.js
+index d8eb7dfe67cf2a8bab927006147a2cfa4393e9b2..e0ad3a5fa1fc6f3aa18273eba90196b4076e840e 100644
+--- a/getDefaultTheme.js
++++ b/getDefaultTheme.js
+@@ -1,3 +1,3 @@
+-import createTheme from "./createTheme";
++import createTheme from "./createTheme/index.jsx";
+ import makeGetDefaultTheme from "./makeGetDefaultTheme";
+ export default makeGetDefaultTheme(createTheme);
+diff --git a/package.json b/package.json
+index bb190e70e83ba3d1c142177afe3dbd900637e548..75fc0a2b55bf99aa98d900089b0b996e7c0539ad 100644
+--- a/package.json
++++ b/package.json
+@@ -9,7 +9,8 @@
+     "mui",
+     "system"
+   ],
+-  "main": "index.jsx",
++  "type": "module",
++  "module": "index.jsx",
+   "dependencies": {
+     "clsx": "^1.2.1",
+     "csstype": "^3.1.1",
+diff --git a/useTheme.js b/useTheme.js
+index 7ccff5fff36c4deb0bd67d2a52f1da010d908495..19d9d56494a5aa2d9813186d99320567e60555a5 100644
+--- a/useTheme.js
++++ b/useTheme.js
+@@ -1,4 +1,4 @@
+-import ThemeContext from "./ThemeContext";
++import ThemeContext from "./ThemeContext/index.jsx";
+ import getDefaultTheme from "./getDefaultTheme";
+ import isEmptyObject from "@suid/utils/isEmptyObject";
+ import { useContext } from "solid-js";
