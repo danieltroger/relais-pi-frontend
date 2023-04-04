@@ -1,0 +1,35 @@
+{
+  "name": "heating-frontend",
+  "scripts": {
+    "dev": "DEBUG=true SENTRY=false solid-start dev",
+    "build": "DEBUG=true SENTRY=false solid-start build && cat ./src/fake_document.ts ./dist/server.js > ./dist/temp && mv ./dist/temp ./dist/server.js",
+    "start": "DEBUG=true SENTRY=false solid-start start"
+  },
+  "type": "module",
+  "devDependencies": {
+    "sass": "^1.57.1",
+    "solid-start-node": "^0.2.14",
+    "typescript": "^4.9.4",
+    "vite": "^3.2.5"
+  },
+  "dependencies": {
+    "@depict-ai/plp-styling": "^0.0.3",
+    "@depict-ai/ui": "^0.0.33",
+    "@depict-ai/utilishared": "^0.0.31",
+    "@solidjs/meta": "^0.28.2",
+    "@solidjs/router": "^0.6.0",
+    "prettier": "^2.8.3",
+    "solid-js": "^1.6.9",
+    "solid-start": "^0.2.14",
+    "undici": "^5.15.0"
+  },
+  "engines": {
+    "node": ">=16.8"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "@depict-ai/utilishared@0.0.31": "patches/@depict-ai__utilishared@0.0.31.patch",
+      "@depict-ai/ui@0.0.33": "patches/@depict-ai__ui@0.0.33.patch"
+    }
+  }
+}
