@@ -66,10 +66,15 @@ export function Scheduler({
             };
             const start_time = createMemo(
               () =>
-                `${schedule().start_time.hour}:${schedule().start_time.minute}`
+                `${pad_if_needed(schedule().start_time.hour)}:${pad_if_needed(
+                  schedule().start_time.minute
+                )}`
             );
             const end_time = createMemo(
-              () => `${schedule().end_time.hour}:${schedule().end_time.minute}`
+              () =>
+                `${pad_if_needed(schedule().end_time.hour)}:${pad_if_needed(
+                  schedule().end_time.minute
+                )}`
             );
             const [get_override_row_contents, set_override_row_contents] =
               createSignal<solid_JSX.Element>();
@@ -151,8 +156,12 @@ export function Scheduler({
 }
 
 function EditingSection({
-  start_time = "00:00",
-  end_time = "00:01",
+  start_time = new Date().toLocaleString(undefined, {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }),
+  end_time = "23:59",
   on_cancel,
   on_submit,
 }: {
@@ -224,5 +233,12 @@ function EditingSection({
         </div>
       </form>
     );
+  });
+}
+
+function pad_if_needed(number: number) {
+  return number.toLocaleString(undefined, {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
   });
 }
