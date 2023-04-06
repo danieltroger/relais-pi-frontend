@@ -68,31 +68,43 @@ p {
   }
 }
 
+.toggles {
+  min-width: 50vw;
+}
+
 .set_schedule {
   border: 2px solid #252525;
   border-radius: 5px;
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: 10px;
 
   .header {
     background: #252525;
     padding: 15px;
     font-weight: 500;
   }
-  .toggles {
+  .list {
     display: flex;
     flex-direction: column;
+    background: #252525;
 
     .row {
-      padding-left: 15px;
-      padding-bottom: 15px;
-      padding-right: 15px;
+      margin-bottom: 2px;
+      background: black;
+      padding: 10px 15px;
       display: flex;
       flex-wrap: wrap;
       gap: 30px;
       justify-content: space-between;
+
+      &.editing {
+        background: #806f00;
+      }
+
+      .edit_section {
+        display: flex;
+      }
 
       .toggle_section {
         display: flex;

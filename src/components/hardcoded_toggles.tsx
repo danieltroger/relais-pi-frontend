@@ -1,36 +1,28 @@
 import {
-  Accessor,
-  createComputed,
   createMemo,
   createSignal,
   For,
   getOwner,
-  Index,
   JSX as solid_JSX,
   runWithOwner,
-  Setter,
-  Signal,
 } from "solid-js";
 import { get_backend_synced_signal } from "~/utilities/get_backend_synced_signal";
 import { socket } from "~/utilities/socket";
-import {
-  catchify,
-  make_random_classname,
-  random_string,
-} from "@depict-ai/utilishared";
+import { catchify, random_string } from "@depict-ai/utilishared";
 import { GPIOObj } from "~/routes/gpio";
 import {
   createTheme,
   FormControlLabel,
-  Switch,
-  ThemeProvider,
+  IconButton,
   List,
   ListItem,
-  IconButton,
+  Switch,
+  ThemeProvider,
 } from "@suid/material";
-import { Schedule, Delete, Add } from "@suid/icons-material";
+import { Schedule } from "@suid/icons-material";
+import { Scheduler } from "~/components/scheduler";
 
-type Config = {
+export type Config = {
   non_reactive_gpio_state_to_persist_program_restarts: { [key: string]: 0 | 1 }; // We could type this properly to the GPIO outputs but that could risk trouble with recursive imports
   schedules: {
     [key: string]: {
@@ -78,12 +70,13 @@ export default function HardcodedToggles() {
                       aria-label="schedule"
                       onClick={catchify(() => {
                         if (get_extra_list_item()) {
+                          // TODO: prompt if sure to discard changes if changing
                           set_extra_list_item();
                         } else {
                           runWithOwner(owner, () =>
                             set_extra_list_item(
                               <ListItem>
-                                <SetSchedule
+                                <Scheduler
                                   switch_key={switch_key}
                                   set_config={set_config}
                                   get_config={get_config}
@@ -131,81 +124,5 @@ export default function HardcodedToggles() {
         </List>
       </div>
     </ThemeProvider>
-  );
-}
-
-function SetSchedule({
-  switch_key,
-  get_config,
-  set_config,
-}: {
-  switch_key: string;
-  get_config: Accessor<Config | undefined>;
-  set_config:
-    | ((new_value: Config) => Promise<boolean>)
-    | Setter<Config | undefined>;
-}) {
-  // TODO: what if there already is a schedule in this time
-  const schedules = createMemo(() => get_config()?.schedules[switch_key] || []);
-  createComputed(() => console.log("Config", schedules()));
-
-  return (
-    <div class="set_schedule">
-      <div class="header">
-        Schedule for <b>{switch_key}</b>
-      </div>
-      <div class="toggles">
-        <Index each={schedules()}>
-          {(schedule) => {
-            const start_time = createMemo(
-              () =>
-                `${schedule().start_time.hour}:${schedule().start_time.minute}`
-            );
-            const end_time = createMemo(
-              () => `${schedule().end_time.hour}:${schedule().end_time.minute}`
-            );
-            const start_id = make_random_classname();
-            const end_id = make_random_classname();
-            let start_input: HTMLInputElement;
-            let end_input: HTMLInputElement;
-
-            return (
-              <div class="row">
-                <IconButton>
-                  <Delete />
-                </IconButton>
-                <div class="toggle_section">
-                  <label for={start_id}>Start time</label>
-                  <input
-                    type="time"
-                    id={start_id}
-                    value={start_time()}
-                    ref={(el) => (start_input = el)}
-                    onInput={catchify(() => {
-                      console.log(start_input.value);
-                    })}
-                  />
-                </div>
-                <div class="toggle_section">
-                  <label for={end_id}>End time</label>
-                  <input
-                    type="time"
-                    id={end_id}
-                    value={end_time()}
-                    ref={(el) => (end_input = el)}
-                    onInput={catchify(() => {})}
-                  />
-                </div>
-              </div>
-            );
-          }}
-        </Index>
-      </div>
-      <div class="button">
-        <IconButton>
-          <Add />
-        </IconButton>
-      </div>
-    </div>
   );
 }
