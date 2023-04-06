@@ -1,6 +1,5 @@
 import {
   Accessor,
-  createComputed,
   createMemo,
   createSignal,
   Index,
@@ -37,7 +36,6 @@ export function Scheduler({
   const schedules = createMemo(() => get_config()?.schedules[switch_key] || []);
   const [get_adding_section, set_adding_section] =
     createSignal<solid_JSX.Element>();
-  createComputed(() => console.log("Config", schedules()));
   const scheduler_owner = getOwner()!;
 
   return (
@@ -189,7 +187,8 @@ function EditingSection({
             Object.fromEntries(
               [...new FormData(form)].map(([field, value]) => {
                 const [hour, minute] = (value as string).split(":");
-                return [field as any, { hour, minute }];
+                // Very important to convert to numbers here since backend runs on numbers
+                return [field as any, { hour: +hour, minute: +minute }];
               })
             )
           );
